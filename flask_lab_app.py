@@ -20,5 +20,14 @@ def load_data():
 def get_cell(row,column):
     return data[int(row)][int(column)]
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return "there aint shit here try somewhere else"
+
+@app.errorhandler(500)
+def python_bug(e):
+    return "i fucked up... sorry"
+
+
 if __name__ == "__main__":
     app.run()
