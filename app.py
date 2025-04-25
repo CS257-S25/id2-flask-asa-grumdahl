@@ -1,14 +1,25 @@
 from flask import Flask
+import csv
 
 app = Flask(__name__)
 
 @app.route('/')
-def this():
-    return "fermented greenland shark"
+def homepage():
+    with open ("./homepage.html") as f:
+        homepage_local = f.read()
+    return homepage_local
 
+
+
+
+"""
 data = []
-def load_data():
-    with open('dataset.csv', newline='') as f:
+
+def load_all_data():
+    load_data('Dummy_data/dummy_amazon.csv')
+
+def load_data(filename):
+    with open(filename, newline='') as f:
         reader = csv.reader(f)
         for row in reader:
             data.append(row)
@@ -24,6 +35,7 @@ def page_not_found(e):
 @app.errorhandler(500)
 def python_bug(e):
     return "Some kind of bug happened..."
+"""
 
 if __name__ == "__main__":
     app.run()
