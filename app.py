@@ -9,20 +9,17 @@ def homepage():
         homepage_local = f.read()
     return homepage_local
 
-
-
-
-"""
 data = []
-
-def load_all_data():
-    load_data('Dummy_data/dummy_amazon.csv')
 
 def load_data(filename):
     with open(filename, newline='') as f:
         reader = csv.reader(f)
         for row in reader:
             data.append(row)
+
+"""
+def load_all_data():
+    load_data('Dummy_data/dummy_amazon.csv')
 
 @app.route('/<row>/<column>', strict_slashes=False)
 def get_cell(row,column):
