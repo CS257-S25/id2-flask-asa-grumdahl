@@ -6,6 +6,7 @@ Filters can be applied based on actor names, genres/categories, and release year
 operates on a dictionary of media objects and supports retrieving and printing the filtered results.
 """
 
+from ProductionCode import data as datapy
 
 class Filter:
     """Class with functions to easily filter movies based on actor, genre, and year"""
@@ -14,7 +15,7 @@ class Filter:
         """
         Initializes the Filter with data from the datasets and creates a copy to be filtered.
         """
-        self.media_dict = data.get_media_dict()
+        self.media_dict = data.get_media_dict(datapy.Data)
         self.filtered_media_dict = self.media_dict.copy()
 
     def filter_by_actor(self, name):

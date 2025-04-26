@@ -83,10 +83,10 @@ class Media:
 
 
 def import_all_datasets_to_list(
-    netflix_dataset="Data/netflix_titles.csv",
-    amazon_dataset="Data/amazon_prime_titles.csv",
-    disney_dataset="Data/disney_plus_titles.csv",
-    hulu_dataset="Data/hulu_titles.csv",
+    netflix_dataset="Dummy_data/dummy_netflix.csv",
+    amazon_dataset="Dummy_data/dummy_amazon.csv",
+    disney_dataset="Dummy_data/dummy_disney.csv",
+    hulu_dataset="Dummy_data/dummy_hulu.csv",
 ):
     """
     Imports datasets from various streaming services and returns a list containing the data of 

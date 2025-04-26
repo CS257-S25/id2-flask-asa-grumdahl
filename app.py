@@ -1,5 +1,14 @@
-from flask import Flask
+"""
+app.py
+
+This runs a small application using some of the backend data coded for my team project.
+Features are described in homepage.html.
+"""
+
+from flask import Flask, request
 import csv
+from ProductionCode import data as datapy
+from ProductionCode import filter as filterpy
 import re 
 
 app = Flask(__name__)
@@ -13,55 +22,36 @@ def homepage():
         homepage_local = f.read()
     return homepage_local
 
-def get_data(path_to_file):
-    """ 
-    Retrieves data given a filepath and returns it. 
-        path_to_file: string representation of path to file
+@app.route('/filter',strict_slashes=False)
+def filter_page():
     """
-    data = []
-    with open(path_to_file, newline='') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            data.append(row)
-    return data
-
-def turn_dataset_name_in_url_to_filepath(dataset_name):
-    """ 
-    Turns the dataset name the user enters in the URL to a filepath. 
+    Loads a page visualizing a filtered dataset.
     """
-    return "./Dummy_data/dummy_" + dataset_name.lower() + ".csv"
+    initialize_data()
+    release_year_onward = parse_ui_release_year_onward(request.args.get("ry"))
+    filterpy.Filter.filter_by_year_onward(filterpy.Filter,release_year_onward)
+    return str(filterpy.Filter.get_filtered_media_dict(filterpy.Filter))
 
-
-@app.route('/<dataset>/<movienum>', strict_slashes=False)
-def dataset_page(dataset,movienum):
-    """ 
-    Generates a page for each dataset based on the info in the dataset. 
-        dataset: name of the dataset to attempt to grab. throws 503 if not one of "amazon" "disney" "hulu" or "netfix"
-        movienum: number inside dataset to grab
+def initialize_data():
     """
-    data = get_data(turn_dataset_name_in_url_to_filepath(dataset))
-    return data[int(movienum)][4]
+    Initializes the data for rendering in the website.
+    """
+    datapy.Data.__init__(datapy.Data)
+    filterpy.Filter.__init__(filterpy.Filter, datapy.Data)
+    pass
+
+def parse_ui_release_year_onward(ui_ry):
+    """
+    Parses user input for a release year, so it may be read by filter.py's functions. Returns a catch-all year otherwise.
+    """
+    try: 
+        return int(ui_ry)
+    except:
+        return 0
 
 @app.errorhandler(404)
 def  page_not_found(e):
     return "There's nothing here! Try returning to the main page."
-
-"""
-def load_all_data():
-    load_data('Dummy_data/dummy_amazon.csv')
-
-@app.route('/<row>/<column>', strict_slashes=False)
-def get_cell(row,column):
-    return data[int(row)][int(column)]
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return "Nothing leads here! I recommend navigating back to the homepage."
-
-@app.errorhandler(500)
-def python_bug(e):
-    return "Some kind of bug happened..."
-"""
 
 if __name__ == "__main__":
     app.run()
