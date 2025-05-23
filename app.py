@@ -6,17 +6,15 @@ Features are described in homepage.html.
 """
 
 from flask import Flask, request
-import csv
 from ProductionCode import data as datapy
 from ProductionCode import filter as filterpy
-import re 
 
 app = Flask(__name__)
 
 @app.route('/')
 def homepage():
     """ 
-    Loads homepage.html as the site's home page. 
+    Loads homepage.html as the site's home page.
     """
     with open ("./homepage.html") as f:
         homepage_local = f.read()
@@ -38,19 +36,20 @@ def initialize_data():
     """
     datapy.Data.__init__(datapy.Data)
     filterpy.Filter.__init__(filterpy.Filter, datapy.Data)
-    pass
 
 def parse_ui_release_year_onward(ui_ry):
     """
-    Parses user input for a release year, so it may be read by filter.py's functions. Returns a catch-all year otherwise.
+    Parses user input for a release year, so it may be read by filter.py's 
+    functions. Returns a catch-all year otherwise.
     """
-    try: 
+    try:
         return int(ui_ry)
     except:
         return 0
 
 @app.errorhandler(404)
-def  page_not_found(e):
+def page_not_found(e):
+    print(e)
     return "There's nothing here! Try returning to the main page."
 
 if __name__ == "__main__":
