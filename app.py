@@ -52,7 +52,6 @@ def page_not_found(e):
     """
     Placeholder 404 page.
     """
-    print(e)
     return "There's nothing here! Try returning to the main page."
 
 if __name__ == "__main__":
