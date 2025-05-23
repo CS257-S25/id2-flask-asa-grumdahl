@@ -48,7 +48,7 @@ def parse_ui_release_year_onward(ui_ry):
         return 0
 
 @app.errorhandler(404)
-def page_not_found(Exception e):
+def page_not_found(e):
     """
     Placeholder 404 page.
     """
