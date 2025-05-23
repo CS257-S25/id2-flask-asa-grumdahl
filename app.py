@@ -16,7 +16,7 @@ def homepage():
     """ 
     Loads homepage.html as the site's home page.
     """
-    with open ("./homepage.html") as f:
+    with open ("./homepage.html", encoding="utf_8") as f:
         homepage_local = f.read()
     return homepage_local
 
@@ -48,7 +48,10 @@ def parse_ui_release_year_onward(ui_ry):
         return 0
 
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found(Exception e):
+    """
+    Placeholder 404 page.
+    """
     print(e)
     return "There's nothing here! Try returning to the main page."
 
