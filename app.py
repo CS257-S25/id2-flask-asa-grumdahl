@@ -2,7 +2,6 @@
 app.py
 
 This runs a small application using some of the backend data coded for my team project.
-Features are described in homepage.html.
 """
 
 from flask import Flask, request
