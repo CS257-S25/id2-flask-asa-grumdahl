@@ -43,7 +43,8 @@ def parse_ui_release_year_onward(ui_ry):
     """
     try:
         return int(ui_ry)
-    except:
+    except ValueError as e:
+        print(e)
         return 0
 
 @app.errorhandler(404)
@@ -51,6 +52,7 @@ def page_not_found(e):
     """
     Placeholder 404 page.
     """
+    print(e)
     return "There's nothing here! Try returning to the main page."
 
 if __name__ == "__main__":
