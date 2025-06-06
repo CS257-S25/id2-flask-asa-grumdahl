@@ -16,7 +16,7 @@ class DataTests(unittest.TestCase):
         """ Sets up the test suite. """
         datapy.Data.__init__()
 
-class FilterTests(unittest.testCase):
+class FilterTests(unittest.TestCase):
     """ Test suite for ProductionCode/filter.py """
 
     def setUp(self):
